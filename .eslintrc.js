@@ -1,7 +1,8 @@
-module.exports = {
+export default {
   "env": {
     "browser": true,
     "es6": true,
+    "commonjs": true,
     "jest/globals": true
   },
   "extends": [
@@ -21,15 +22,15 @@ module.exports = {
   "rules": {
     "indent": [
       "error",
-        2
-      ],
+      2
+    ],
     "linebreak-style": [
       "error",
       "unix"
     ],
     "quotes": [
       "error",
-      "single"
+      "double"
     ],
     "semi": [
       "error",
