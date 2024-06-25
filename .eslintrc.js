@@ -1,9 +1,9 @@
-export default {
+module.exports = {
   "env": {
     "browser": true,
     "es6": true,
-    "commonjs": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "commonjs": true
   },
   "extends": [
     "eslint:recommended",
@@ -30,7 +30,7 @@ export default {
     ],
     "quotes": [
       "error",
-      "double"
+      "single"
     ],
     "semi": [
       "error",
