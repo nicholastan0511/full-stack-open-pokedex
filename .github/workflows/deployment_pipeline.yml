@@ -26,7 +26,7 @@ jobs:
       - name: e2e test
         run: npm run test:e2e
       - name: Render GitHub Action
-        uses: Bounceapp/render-action@0.80
+        uses: bounceapp/render-action@0.8.0
         with:
           render-token: rnd_tcqSVGMpcNS6u33zgwQLRNAnudxP
           service-id: srv-cpu14t9u0jms73ehh470
