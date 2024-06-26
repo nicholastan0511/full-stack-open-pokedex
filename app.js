@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 
-app.get('*', (req, res) => {
+app.get('/pokemon/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
