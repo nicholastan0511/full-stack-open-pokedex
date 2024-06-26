@@ -12,6 +12,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
+// dumnmy endpoint to ensure that the deployed version has really changed
+app.get('/version', (req, res) => {
+  res.send('1')
+})
+
 app.listen(PORT, () => {
   // eslint-disable-next-line
   console.log(`server started on port ${PORT}`)
