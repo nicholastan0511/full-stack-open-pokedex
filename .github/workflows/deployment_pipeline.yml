@@ -33,5 +33,15 @@ jobs:
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           api-key: rnd_tcqSVGMpcNS6u33zgwQLRNAnudxP
-          service-id: srv-cpu14t9u0jms73ehh470
-      
+          service-id: srv-cpu14t9u0jms73ehh470  
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04 
+    steps:
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: true
+        
