@@ -57,6 +57,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+      # Post notification to discord when new version has been deployed successfully
+      # DISCORD_WEBHOOK is stored in the 'secret' section on project settings
       - name: success indication when a new version is deployed
         if: ${{ success() }}
         uses: rjstone/discord-webhook-notify@v1.0.4
