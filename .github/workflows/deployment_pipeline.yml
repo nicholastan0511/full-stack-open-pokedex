@@ -34,6 +34,14 @@ jobs:
         with:
           api-key: rnd_tcqSVGMpcNS6u33zgwQLRNAnudxP
           service-id: srv-cpu14t9u0jms73ehh470  
+      - name: failure indication when a build fails
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          details: Build has failed!
+          severity: error
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04 
@@ -43,10 +51,21 @@ jobs:
         with:
           node-version: '20'
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+      # skip action if there's pull request's commit message contains "#skip" and if the action performed is not a push (e.g. merging into the main branch or pushing changes directly to the main branch) 
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} 
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DRY_RUN: true
-        
+      - name: success indication when a new version is deployed
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          details: A new version has been deployed!
+          severity: info
+
+
+
+
+    
